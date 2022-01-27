@@ -1,19 +1,26 @@
 <template>
-  <div id="Header">
+  <div class="header">
     <Header />
+    <Nav />
   </div>
-  <router-view></router-view>
+  <router-view />
 </template>
-<script>
-import { defineComponent } from "@vue/runtime-core";
-import Header from './components/Header.vue'
-
+<script lang="ts">
+import { defineComponent } from '@vue/runtime-core';
+import Header from './components/Header.vue';
+import Nav from './components/Nav.vue';
+import './assets/css/reset.css';
 export default defineComponent({
-  components: {
-    Header,
-  },
-  setup() {
-    
-  },
-})
+	components: {
+		Header,
+		Nav,
+	},
+});
 </script>
+<style scoped lang="scss">
+.header {
+  position: relative;
+  z-index: 101;
+}
+
+</style>
