@@ -28,5 +28,6 @@ module.exports = {
 		'indent': 'off',
 		'vue/multi-word-component-names': 0,
 		'@typescript-eslint/semi': 'off',
+		'@typescript-eslint/no-explicit-any': ['off'],
 	}
 };

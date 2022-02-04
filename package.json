@@ -1,6 +1,7 @@
 {
   "name": "toy",
-  "version": "0.0.0",  "scripts": {
+  "version": "0.0.0",
+  "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
@@ -8,12 +9,17 @@
     "format": "prettier .  --write"
   },
   "dependencies": {
+    "@types/swiper": "^6.0.0",
+    "@vue/composition-api": "^1.4.5",
     "prettier": "^2.5.1",
     "sass": "^1.49.0",
+    "swiper": "^8.0.3",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue-types": "^4.1.1"
   },
   "devDependencies": {
+    "@types/node": "^17.0.13",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
     "@vitejs/plugin-vue": "^2.0.0",

@@ -2,6 +2,7 @@
   <div
     class="nav"
     :class="{ 'fixed': nav_fixed === true}"
+    @mouseleave="overMenuHide"
   >
     <div class="contents">
       <h1>
@@ -13,9 +14,15 @@
         </router-link>
       </h1>
       <ul class="nav_menu">
-        <li>
-          <h2><a href="">영화</a></h2>
-          <dl class="nav_overMenu">
+        <li
+          :class="{'active':nav_over_menu === true}"
+        >
+          <h2 @mouseover="overMenuView">
+            <a href="">영화</a>
+          </h2>
+          <dl
+            class="nav_overMenu first"
+          >
             <dt>
               <h2><a href="">영화</a></h2>
             </dt>
@@ -27,9 +34,13 @@
             </dd>
           </dl>
         </li>
-        <li>
-          <h2><a href="">극장</a></h2>
-          <dl class="nav_overMenu">
+        <li :class="{'active':nav_over_menu === true}">
+          <h2 @mouseover="overMenuView">
+            <a href="">극장</a>
+          </h2>
+          <dl
+            class="nav_overMenu"
+          >
             <dt>
               <h2><a href="">극장</a></h2>
             </dt>
@@ -41,9 +52,13 @@
             </dd>
           </dl>
         </li>
-        <li>
-          <h2><a href="">예매</a></h2>
-          <dl class="nav_overMenu">
+        <li :class="{'active':nav_over_menu === true}">
+          <h2 @mouseover="overMenuView">
+            <a href="">예매</a>
+          </h2>
+          <dl
+            class="nav_overMenu"
+          >
             <dt>
               <h2><a href="">예매</a></h2>
             </dt>
@@ -55,12 +70,19 @@
             </dd>
           </dl>
         </li>
-        <li>
-          <h2><a href="">스토어</a></h2>
-          <dl class="nav_overMenu">
+        <li :class="{'active':nav_over_menu === true}">
+          <h2 @mouseover="overMenuView">
+            <a href="">스토어</a>
+          </h2>
+          <dl
+            class="nav_overMenu"
+          >
             <dt>
-              <h2><a href="">영화관람권</a></h2>
+              <h2><a href="">스토어</a></h2>
             </dt>
+            <dd>
+              <h3><a href="">영화관람권</a></h3>
+            </dd>
             <dd>
               <h3><a href="">기프트카드</a></h3>
             </dd>
@@ -72,12 +94,20 @@
             </dd>
           </dl>
         </li>
-        <li>
-          <h2><a href="">이벤트</a></h2>
-          <dl class="nav_overMenu">
+        <li :class="{'active':nav_over_menu === true}">
+          <h2 @mouseover="overMenuView">
+            <a href="">이벤트</a>
+          </h2>
+          <dl
+            class="nav_overMenu"
+            :class="{'active':nav_over_menu === true}"
+          >
             <dt>
-              <h2><a href="">SPECIAL</a></h2>
+              <h2><a href="">이벤트</a></h2>
             </dt>
+            <dd>
+              <h3><a href="">SPECIAL</a></h3>
+            </dd>
             <dd>
               <h3><a href="">영화/예매</a></h3>
             </dd>
@@ -89,12 +119,19 @@
             </dd>
           </dl>
         </li>
-        <li>
-          <h2><a href="">혜택</a></h2>
-          <dl class="nav_overMenu">
+        <li :class="{'active':nav_over_menu === true}">
+          <h2 @mouseover="overMenuView">
+            <a href="">혜택</a>
+          </h2>
+          <dl
+            class="nav_overMenu"
+          >
             <dt>
-              <h2><a href="">CGV 할인정보</a></h2>
+              <h2><a href="">혜택</a></h2>
             </dt>
+            <dd>
+              <h3><a href="">CGV 할인정보</a></h3>
+            </dd>
             <dd>
               <h3><a href="">CLUB 서비스</a></h3>
             </dd>
@@ -129,7 +166,15 @@ export default defineComponent({
     return {
       nav_left: 0 as number,
       nav_fixed: false as boolean,
-      nav_over_menu: 'none' as string,
+      nav_over_menu: false as boolean,
+    }
+  },
+  methods: {
+    overMenuView() {
+      this.nav_over_menu = true
+    },
+    overMenuHide() {
+      this.nav_over_menu = false
     }
   }
 });
@@ -176,6 +221,17 @@ export default defineComponent({
     background-color: #a58e8e;
   }
 
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 49px;
+    width: 100%;
+    height: 1px;
+    background-color: #fb4357;
+  }
+
   > .contents {
     position: relative;
     width: 980px;
@@ -191,8 +247,20 @@ export default defineComponent({
       > li {
         width: 162px;
         padding: 20px 0;
+        
+        &.active {
+          > .nav_overMenu {
+          margin-bottom: 8px;
+          height: 230px;
+          margin-top: 0px;
 
-        &:first {
+            > dt {
+              padding-top: 18px;
+            }
+          }
+        }
+
+        &:first-child {
           width: 137px;
 
           > .nav_overMenu {
@@ -200,8 +268,35 @@ export default defineComponent({
           }
         }
 
+        &:nth-child(2) {
+          > h2 {
+            left: 80px;
+          }
+        }
+
+        &:nth-child(3) {
+          > h2 {
+            left: 160px;
+          }
+        }
+
+        &:nth-child(4) {
+          > h2 {
+            left: 240px;
+          }
+        }
+
+        &:nth-child(5) {
+          > h2 {
+            left: 335px;
+          }
+        }
+
         &:last-child {
           width: 195px;
+          > h2 {
+            left: 430px;
+          }
         }
 
         > h2 {
@@ -217,14 +312,39 @@ export default defineComponent({
         }
 
         > .nav_overMenu {
-          display: v-bind(nav_over_menu);
+          display: block;
           position: relative;
-          margin-bottom: 8px;
-          padding: 25px 0 0 25px;
+          margin-bottom: 0px;
+          padding: 0px 0 0 25px;
+          overflow: hidden;
+          height: 0px;
+          transition: 0.3s;
+          top: 25px;
+          &.first {
+
+            &.active {
+              padding: 25px 0 0 0px;
+            }
+
+            &::before{
+              display: none;
+            }
+          }
+
+          &::before{
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 45px;
+            display: block;
+            width: 1px;
+            height: 170px;
+            background-color: #eee;
+            opacity: 0.8;
+          }
 
           > dt {
-            padding-top: 18px;
-
+            transition: 0.3s;
             a {
               font-weight: 700;
               font-size: 14px;
@@ -276,6 +396,16 @@ export default defineComponent({
 
       > label {
         display: block;
+
+        input[type="text"] {
+          width: 180px;
+          height: auto;
+          padding: 0 0 0 7px;
+          font-size: 16px;
+          color: #222;
+          line-height: 1.500em;
+          border: none;
+        }
       }
 
       > .btn_totalSearch {

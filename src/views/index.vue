@@ -1,35 +1,28 @@
+<template>
+  <div id="container">
+    <MovieBanner />
+    <MovieList />
+  </div>
+</template>
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core';
-interface Text {
-        a: testType,
-        b: number,
-        c: Array<string>,
-    }
-
-type testType = 'test'|'asd';
+import MovieBanner from '@/components/main/MovieBanner.vue';
+import MovieList from '@/components/main/MovieList.vue'
 export default defineComponent({
-	data() {
-		return {
-			text: {
-				a: 'asd',
-				b: 1234,
-				c: [],
-			} as Text,
-			test: 'test' as string|true,
-			color: 'red' as string,
-		};
+	components: {
+		MovieBanner,
+		MovieList,
 	},
-	watch: {
-		'text.b'() {
-			console.log(this.text.b);
-			this.text.c.push(String(this.text.b));
-		},
+	data() {
+		return {};
 	}
 });
 </script>
 
-<style>
-div {
-    color: v-bind(color)
+<style scoped lang="scss">
+#container {
+	position: relative;
+    width: 100%;
+    z-index: 7;
 }
 </style>

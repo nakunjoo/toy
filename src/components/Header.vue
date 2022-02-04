@@ -4,7 +4,7 @@
       <h1>
         <router-link :to="{ name: 'index' }">
           <img
-            src="../assets/logoRed.png"
+            src="@/assets/logoRed.png"
             alt=""
           >
         </router-link>
