@@ -5,4 +5,8 @@ declare module '*.vue' {
   // eslint-disable-next-line @typescript-eslint/ban-types
   const component: DefineComponent<{}, {}, any>
   export default component
+  type GlobalFunctionType = (name:Date) => void
+  export interface ComponentCustomProperties {
+    $moment: GlobalFunctionType
+  }
 }

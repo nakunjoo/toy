@@ -14,7 +14,8 @@
       <swiper
         :slides-per-view="5"
         :slides-per-group="5"
-        :navigation="true"
+        :space-between="32"
+        navigation
         class="movieChart_list"
       >
         <swiper-slide
@@ -28,7 +29,7 @@
             >
             <div class="movieAgeLimit_wrap">
               <img
-                :src="getImageUrl(`../../assets/icon/grade-${chart.audience}.png`)"
+                :src="getImageUrl(`../assets/icon/grade-${chart.audience}.png`)"
                 :alt="chart.audience"
               >
               <div
@@ -45,7 +46,7 @@
                 class="screenType"
               >
                 <img
-                  :src="getImageUrl(`../../assets/icon/${hall}_white.png`)"
+                  :src="getImageUrl(`../assets/icon/${hall}_white.png`)"
                   :alt="hall"
                 >
               </i>
@@ -65,7 +66,7 @@
             <strong class="movieName">{{ chart.title }}</strong>
             <span>
               <img
-                :src="getImageUrl(`../../assets/icon/eggGoldenegg${chart.golden_egg}.png`)" 
+                :src="getImageUrl(`../assets/icon/eggGoldenegg${chart.golden_egg}.png`)" 
                 :alt="chart.golden_egg"
               >{{ chart.golden_egg_value }}
             </span>
@@ -88,6 +89,7 @@ import '../../assets/css/swiper.min.scss';
 import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 
 import { MovieChartBeScreen } from '@/types/MainInterface'
+import { getImageUrl } from '@/plugins/Global'
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 export default defineComponent({
@@ -97,9 +99,10 @@ export default defineComponent({
   },
 	data() {
 		return {
+      getImageUrl: getImageUrl,
       movie_list:[
         {
-          move_img: '../../assets/movie_img/movie_0.jpg',
+          move_img: '../assets/movie_img/movie_main_0.jpg',
           audience: '12',
           d_day: 5,
           special_hall: ['imax'],
@@ -109,7 +112,7 @@ export default defineComponent({
           reservation_rate: '18.7%'
         },
         {
-          move_img: '../../assets/movie_img/movie_1.jpg',
+          move_img: '../assets/movie_img/movie_main_1.jpg',
           audience: '12',
           d_day: null,
           special_hall: ['imax', 'forDX'],
@@ -119,7 +122,7 @@ export default defineComponent({
           reservation_rate: '15.5%'
         },
         {
-          move_img: '../../assets/movie_img/movie_2.jpg',
+          move_img: '../assets/movie_img/movie_main_2.jpg',
           audience: 'all',
           d_day: 5,
           special_hall: ['forDX'],
@@ -129,7 +132,7 @@ export default defineComponent({
           reservation_rate: '13.9%'
         },
         {
-          move_img: '../../assets/movie_img/movie_3.jpg',
+          move_img: '../assets/movie_img/movie_main_3.jpg',
           audience: '15',
           d_day: 13,
           special_hall: ['forDX'],
@@ -139,7 +142,7 @@ export default defineComponent({
           reservation_rate: '11.8%'
         },
         {
-          move_img: '../../assets/movie_img/movie_4.jpg',
+          move_img: '../assets/movie_img/movie_main_4.jpg',
           audience: '12',
           d_day: 5,
           special_hall: ['imax'],
@@ -149,7 +152,7 @@ export default defineComponent({
           reservation_rate: '9.4%'
         },
         {
-          move_img: '../../assets/movie_img/movie_5.jpg',
+          move_img: '../assets/movie_img/movie_main_5.jpg',
           audience: '12',
           d_day: 5,
           special_hall: [],
@@ -159,7 +162,7 @@ export default defineComponent({
           reservation_rate: '7.1%'
         },
         {
-          move_img: '../../assets/movie_img/movie_6.jpg',
+          move_img: '../assets/movie_img/movie_main_6.jpg',
           audience: '15',
           d_day: null,
           special_hall: [],
@@ -169,7 +172,7 @@ export default defineComponent({
           reservation_rate: '6.1%'
         },
         {
-          move_img: '../../assets/movie_img/movie_7.jpg',
+          move_img: '../assets/movie_img/movie_main_7.jpg',
           audience: '12',
           d_day: null,
           special_hall: [],
@@ -179,7 +182,7 @@ export default defineComponent({
           reservation_rate: '3.8%'
         },
         {
-          move_img: '../../assets/movie_img/movie_8.jpg',
+          move_img: '../assets/movie_img/movie_main_8.jpg',
           audience: 'all',
           d_day: null,
           special_hall: [],
@@ -189,7 +192,7 @@ export default defineComponent({
           reservation_rate: '2.3%'
         },
         {
-          move_img: '../../assets/movie_img/movie_9.jpg',
+          move_img: '../assets/movie_img/movie_main_9.jpg',
           audience: '12',
           d_day: 7,
           special_hall: ['imax'],
@@ -201,17 +204,6 @@ export default defineComponent({
       ] as Array<MovieChartBeScreen>,
     };
 	},
-  methods: {
-    onSwiper(swiper: any) {
-      console.log(swiper);
-    },
-    onSlideChange() {
-      console.log('slide change');
-    },
-    getImageUrl(name:string) {
-      return new URL(name, import.meta.url).href
-    }
-  },
 });
 </script>
 
@@ -274,7 +266,7 @@ export default defineComponent({
             font-size: 14px;
             color: #222;
             line-height: 1.429em;
-            background: transparent url(../../assets/icon/arrowR_8x13.png) calc(100% - 7px) center/8px 13px scroll no-repeat;
+            background: transparent url(../assets/icon/arrowR_8x13.png) calc(100% - 7px) center/8px 13px scroll no-repeat;
             border: 1px solid #e2e2e2;
             border-radius: 15px;
             box-shadow: 1px 1px 1px 0 rgb(0 0 0 / 5%);
@@ -287,12 +279,9 @@ export default defineComponent({
           position: relative;
         }
 
+        
         > .swiper-wrapper {
-
           > div {
-            width: 170.4px !important;
-            margin-right: 32px;
-
             > .img_wrap {
               overflow: hidden;
               position: relative;
@@ -437,18 +426,6 @@ export default defineComponent({
               }
             }
           }
-        }
-
-        > .swiper-button-next {
-          overflow: hidden;
-          right: -20px;
-          top: calc(50% - 26px);
-          width: 40px;
-          height: 40px;
-          margin-top: -20px;
-          font-size: 0;
-          border-radius: 50%;
-          box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
         }
       }
     }

@@ -9,3 +9,13 @@ export interface MovieChartBeScreen {
     golden_egg_value: string, // 골든에그 값
     reservation_rate: string, // 예매율
 }
+
+
+// 이벤트 정보
+export interface EventList {
+    event_img: string, // 이벤트 이미지
+    event_url: string, // 이벤트 페이지 주소
+    title: string, // 이벤트 제목
+    start_day: Date, // 이벤트 시작일
+    end_day: Date, // 이벤트 종료일
+}
