@@ -64,7 +64,8 @@
   transform: translateZ(0);
   backface-visibility: hidden;
 }
-.movieChart_list .swiper-button-next {
+.movieChart_list .swiper-button-next,
+.event_list .swiper-button-next {
   overflow: hidden;
   right: -20px;
   top: calc(50% - 26px);
@@ -97,7 +98,8 @@
     display: none;
   }
 }
-.movieChart_list .swiper-button-prev {
+.movieChart_list .swiper-button-prev,
+.event_list .swiper-button-prev {
   overflow: hidden;
   left: -20px;
   top: calc(50% - 26px);

@@ -266,7 +266,7 @@ export default defineComponent({
             font-size: 14px;
             color: #222;
             line-height: 1.429em;
-            background: transparent url(../assets/icon/arrowR_8x13.png) calc(100% - 7px) center/8px 13px scroll no-repeat;
+            background: transparent url(../../assets/icon/arrowR_8x13.png) calc(100% - 7px) center/8px 13px scroll no-repeat;
             border: 1px solid #e2e2e2;
             border-radius: 15px;
             box-shadow: 1px 1px 1px 0 rgb(0 0 0 / 5%);

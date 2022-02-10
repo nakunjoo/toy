@@ -19,3 +19,10 @@ export interface EventList {
     start_day: Date, // 이벤트 시작일
     end_day: Date, // 이벤트 종료일
 }
+
+// 특별관 정보
+export interface SpecialHallList {
+    hall_img: string, // 특별관 이미지
+    name: string, // 특별관 이름
+    tag: Array<string>, // 특별관 태그
+}

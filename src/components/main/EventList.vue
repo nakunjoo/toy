@@ -10,15 +10,25 @@
         <a
           href="#none"
           class="btn_eventControl"
+          :class="{active:event_status === 'play'}"
+          @click="eventPlayStop"
         >playStop</a>
       </div>
-      <div class="event_list_wrap">
+      <div
+        class="event_list_wrap"
+      >
         <swiper
+          ref="event_swiper"
           :slides-per-view="3"
           :slides-per-group="3"
           :space-between="24"
+          :autoplay="{
+            delay: 3000,
+            disableOnInteraction: false,
+          }"
           navigation
           class="event_list"
+          @swiper="onSwiper"
         >
           <swiper-slide
             v-for="(event, index) in event_list"
@@ -42,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@vue/runtime-core';
+import { defineComponent } from '@vue/runtime-core';
 
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import '../../assets/css/swiper.min.scss';
@@ -51,6 +61,8 @@ import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 import { EventList } from '@/types/MainInterface'
 import { moment, getImageUrl } from '@/plugins/Global';
 SwiperCore.use([Autoplay, Pagination, Navigation]);
+
+type eventStatus = 'play' | 'stop'
 
 export default defineComponent({
     components: {
@@ -61,6 +73,8 @@ export default defineComponent({
         return {
             moment: moment,
             getImageUrl: getImageUrl,
+            swiper: null as any,
+            event_status: 'play' as eventStatus,
             event_list: [
                 {
                     event_img: '../assets/event_img/event_main_1.jpg',
@@ -114,6 +128,20 @@ export default defineComponent({
             ] as Array<EventList>
         }
     },
+    methods: {
+        eventPlayStop() {
+            if (this.event_status === 'play') {
+                this.event_status = 'stop'
+                this.swiper.autoplay.stop()
+            } else {
+                this.event_status = 'play'
+                this.swiper.autoplay.start()
+            }
+        },
+        onSwiper(swiper:any) {
+            this.swiper = swiper
+        }
+    }
 })
 </script>
 
@@ -149,7 +177,7 @@ export default defineComponent({
                 font-size: 14px;
                 color: #222;
                 line-height: 1.429em;
-                background: transparent url(../assets/icon/arrowR_8x13.png) calc(100% - 7px) center/8px 13px scroll no-repeat;
+                background: transparent url(../../assets/icon/arrowR_8x13.png) calc(100% - 7px) center/8px 13px scroll no-repeat;
                 border: 1px solid #e2e2e2;
                 border-radius: 15px;
                 box-shadow: 1px 1px 1px 0 rgb(0 0 0 / 5%);
@@ -166,6 +194,10 @@ export default defineComponent({
                 background: transparent url(../../assets/icon/play_black.png) 10px center/11px 15px scroll no-repeat;
                 border: 1px solid #e3e3e3;
                 border-radius: 50%;
+
+                &.active {
+                    background: transparent url(../../assets/icon/stop_black.png) 10px center/11px 15px scroll no-repeat;
+                }
             }
 
             &::after {
@@ -201,6 +233,18 @@ export default defineComponent({
                     z-index: 2;
                 }
 
+                &::after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    right: -30px;
+                    top: 0;
+                    width: 10px;
+                    height: 100%;
+                    background-color: #fff;
+                    z-index: 3
+                }
+
                 > .swiper-wrapper {
                     > div {
                         > a {
@@ -211,6 +255,7 @@ export default defineComponent({
                                 width: 310px;
                                 height: 207px;
                                 border-radius: 10px;
+                                position: relative;
 
                                 > img {
                                     position: absolute;
