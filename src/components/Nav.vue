@@ -169,13 +169,27 @@ export default defineComponent({
       nav_over_menu: false as boolean,
     }
   },
+  mounted() {
+    window.addEventListener('scroll', this.detectWindowScrollY)
+  },
+  beforeDestory() {
+    window.removeEventListener('scroll', this.detectWindowScrollY)
+  },
   methods: {
     overMenuView() {
       this.nav_over_menu = true
     },
     overMenuHide() {
       this.nav_over_menu = false
-    }
+    },
+    // 스크롤 위치에따라 movebar위치 이동
+    detectWindowScrollY() {
+      if (window.scrollY > 100) {
+        this.nav_fixed = true
+      } else {
+        this.nav_fixed = false
+      }
+    },
   }
 });
 </script>
@@ -194,6 +208,15 @@ export default defineComponent({
     top: 0px;
     min-width: 1040px;
     padding: 10px 0;
+    left: 0;
+
+    &::after {
+      top: 0;
+      bottom: auto;
+      height: 60px;
+      background-image: linear-gradient(to right, rgb(215, 67, 87), rgb(241,79,58) 59%, rgb(239, 100, 47));
+      z-index: 1;
+    }
 
     > .contents {
       z-index: 2;
@@ -206,6 +229,81 @@ export default defineComponent({
         width: 70px;
         height: 32px;
         z-index: 3;
+
+        > a {
+          display: block;
+
+          > img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      > ul {
+        > li {
+
+          > h2 {
+            > a {
+              color: #fff;
+            }
+          }
+          
+
+          &:first-child {
+            > h2 {
+              left: 120px;
+            }
+          }
+
+          &:nth-child(2) {
+            > h2 {
+              left: 200px;
+            }
+          }
+
+          &:nth-child(3) {
+            > h2 {
+              left: 280px;
+            }
+          }
+
+          &:nth-child(4) {
+            > h2 {
+              left: 360px;
+            }
+          }
+
+          &:nth-child(5) {
+            > h2 {
+              left: 455px;
+            }
+          }
+
+          &:last-child {
+            width: 195px;
+            > h2 {
+              left: 550px;
+            }
+          }
+        }
+      }
+      > .totalSearch_wrap {
+        &::before {
+          background-color: #000;
+          opacity: 0.2;
+        }
+
+        > label {
+          > input[type="text"] {
+            color: #fff;
+            background-color: transparent;
+          }
+        }
+
+        > .btn_totalSearch {
+          background: transparent url(../assets/icon/nav_fixed_search.png) center center/26px scroll no-repeat;
+        }
       }
     }
   }
