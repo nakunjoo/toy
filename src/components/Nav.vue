@@ -18,16 +18,26 @@
           :class="{'active':nav_over_menu === true}"
         >
           <h2 @mouseover="overMenuView">
-            <a href="">영화</a>
+            <router-link :to="{ name: 'Movies', params:{ type: 'chart' } }">
+              영화
+            </router-link>
           </h2>
           <dl
             class="nav_overMenu first"
           >
             <dt>
-              <h2><a href="">영화</a></h2>
+              <h2>
+                <router-link :to="{ name: 'Movies', params:{ type: 'chart' } }">
+                  영화
+                </router-link>
+              </h2>
             </dt>
             <dd>
-              <h3><a href="">무비차트</a></h3>
+              <h3>
+                <router-link :to="{ name: 'Movies', params:{ type: 'chart' } }">
+                  무비차트
+                </router-link>
+              </h3>
             </dd>
             <dd>
               <h3><a href="">아트하우스</a></h3>

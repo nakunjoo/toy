@@ -24,7 +24,7 @@
         >
           <div class="img_wrap">
             <img
-              :src="getImageUrl(chart.move_img)"
+              :src="getImageUrl(chart.movie_img)"
               :alt="chart.title"
             >
             <div class="movieAgeLimit_wrap">
@@ -33,10 +33,10 @@
                 :alt="chart.audience"
               >
               <div
-                v-if="chart.d_day"
+                v-if="d_Days(chart.release_date)"
                 class="dDay_wrap"
               >
-                <span>{{ chart.d_day }}</span>
+                <span>{{ d_Days(chart.release_date) }}</span>
               </div>
             </div>
             <div class="screenType_wrap">
@@ -89,7 +89,7 @@ import '../../assets/css/swiper.min.scss';
 import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 
 import { MovieChartBeScreen } from '@/types/MainInterface'
-import { getImageUrl } from '@/plugins/Global'
+import { getImageUrl, d_Days } from '@/plugins/Global'
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 export default defineComponent({
@@ -100,11 +100,12 @@ export default defineComponent({
 	data() {
 		return {
       getImageUrl: getImageUrl,
+      d_Days: d_Days,
       movie_list:[
         {
-          move_img: '../assets/movie_img/movie_main_0.jpg',
+          movie_img: '../assets/movie_img/movie_main_0.jpg',
           audience: '12',
-          d_day: 5,
+          release_date: new Date('2022-02-09'),
           special_hall: ['imax'],
           title: '듄',
           golden_egg: 'great',
@@ -112,9 +113,9 @@ export default defineComponent({
           reservation_rate: '18.7%'
         },
         {
-          move_img: '../assets/movie_img/movie_main_1.jpg',
+          movie_img: '../assets/movie_img/movie_main_1.jpg',
           audience: '12',
-          d_day: null,
+          release_date: new Date('2022-02-09'),
           special_hall: ['imax', 'forDX'],
           title: '해적-도깨비 깃발',
           golden_egg: 'good',
@@ -122,9 +123,9 @@ export default defineComponent({
           reservation_rate: '15.5%'
         },
         {
-          move_img: '../assets/movie_img/movie_main_2.jpg',
+          movie_img: '../assets/movie_img/movie_main_2.jpg',
           audience: 'all',
-          d_day: 5,
+          release_date: new Date('2022-02-17'),
           special_hall: ['forDX'],
           title: '해리 포터와 불사조 기사단',
           golden_egg: 'Preegg',
@@ -132,9 +133,9 @@ export default defineComponent({
           reservation_rate: '13.9%'
         },
         {
-          move_img: '../assets/movie_img/movie_main_3.jpg',
+          movie_img: '../assets/movie_img/movie_main_3.jpg',
           audience: '15',
-          d_day: 13,
+          release_date: new Date('2022-02-24'),
           special_hall: ['forDX'],
           title: '극장판 주술회전 0',
           golden_egg: 'Preegg',
@@ -142,9 +143,9 @@ export default defineComponent({
           reservation_rate: '11.8%'
         },
         {
-          move_img: '../assets/movie_img/movie_main_4.jpg',
+          movie_img: '../assets/movie_img/movie_main_4.jpg',
           audience: '12',
-          d_day: 5,
+          release_date: new Date('2022-02-16'),
           special_hall: ['imax'],
           title: '덩케르크',
           golden_egg: 'Preegg',
@@ -152,9 +153,9 @@ export default defineComponent({
           reservation_rate: '9.4%'
         },
         {
-          move_img: '../assets/movie_img/movie_main_5.jpg',
+          movie_img: '../assets/movie_img/movie_main_5.jpg',
           audience: '12',
-          d_day: 5,
+          release_date: new Date('2022-02-20'),
           special_hall: [],
           title: '나일 강의 죽음',
           golden_egg: 'Preegg',
@@ -162,9 +163,9 @@ export default defineComponent({
           reservation_rate: '7.1%'
         },
         {
-          move_img: '../assets/movie_img/movie_main_6.jpg',
+          movie_img: '../assets/movie_img/movie_main_6.jpg',
           audience: '15',
-          d_day: null,
+          release_date: new Date('2022-02-09'),
           special_hall: [],
           title: '킹메이커',
           golden_egg: 'great',
@@ -172,9 +173,9 @@ export default defineComponent({
           reservation_rate: '6.1%'
         },
         {
-          move_img: '../assets/movie_img/movie_main_7.jpg',
+          movie_img: '../assets/movie_img/movie_main_7.jpg',
           audience: '12',
-          d_day: null,
+          release_date: new Date('2022-02-09'),
           special_hall: [],
           title: '스파이더맨-노 웨이 홈',
           golden_egg: 'great',
@@ -182,9 +183,9 @@ export default defineComponent({
           reservation_rate: '3.8%'
         },
         {
-          move_img: '../assets/movie_img/movie_main_8.jpg',
+          movie_img: '../assets/movie_img/movie_main_8.jpg',
           audience: 'all',
-          d_day: null,
+          release_date: new Date('2022-02-09'),
           special_hall: [],
           title: '씽2게더',
           golden_egg: 'great',
@@ -192,9 +193,9 @@ export default defineComponent({
           reservation_rate: '2.3%'
         },
         {
-          move_img: '../assets/movie_img/movie_main_9.jpg',
+          movie_img: '../assets/movie_img/movie_main_9.jpg',
           audience: '12',
-          d_day: 7,
+          release_date: new Date('2022-02-17'),
           special_hall: ['imax'],
           title: '비틀즈 겟 백-루프탑 콘서트',
           golden_egg: 'Preegg',
