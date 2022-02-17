@@ -15,7 +15,7 @@
         >
           <div class="img_wrap">
             <img
-              :src="getImageUrl(specialHall.hall_img)"
+              :src="$getImageUrl(specialHall.hall_img)"
               alt=""
             >
           </div>
@@ -50,11 +50,9 @@
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core';
 import { SpecialHallList } from '@/types/MainInterface'
-import { getImageUrl } from '@/plugins/Global';
 export default defineComponent({
     data() {
         return {
-            getImageUrl: getImageUrl,
             hall_number: 0 as number,
             specialHall_list: [
                 {

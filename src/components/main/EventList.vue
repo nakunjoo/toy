@@ -37,12 +37,12 @@
             <a :href="event.event_url">
               <div class="img_wrap">
                 <img
-                  :src="getImageUrl(event.event_img)"
+                  :src="$getImageUrl(event.event_img)"
                   :alt="event.title"
                 >
               </div>
               <strong>{{ event.title }}</strong>
-              <span>{{ moment(event.start_day) }}~{{ moment(event.end_day) }}</span>
+              <span>{{ $moment(event.start_day) }}~{{ $moment(event.end_day) }}</span>
             </a>
           </swiper-slide>
         </swiper>
@@ -59,7 +59,6 @@ import '../../assets/css/swiper.min.scss';
 
 import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 import { EventList } from '@/types/MainInterface'
-import { moment, getImageUrl } from '@/plugins/Global';
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 type eventStatus = 'play' | 'stop'
@@ -71,8 +70,6 @@ export default defineComponent({
     },
     data() {
         return {
-            moment: moment,
-            getImageUrl: getImageUrl,
             swiper: null as any,
             event_status: 'play' as eventStatus,
             event_list: [

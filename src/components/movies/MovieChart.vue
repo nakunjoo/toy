@@ -13,10 +13,10 @@
             class="rank"
             :class="{top:index < 4}"
           >No.{{ index + 1 }}</strong>
-          <a href="#none">
+          <router-link :to="{ name: 'MoviesDetail', query:{ movie_id: index } }">
             <span class="thum-image">
               <img
-                :src="getImageUrl(movie.movie_img)"
+                :src="$getImageUrl(movie.movie_img)"
                 :alt="movie.title"
               >
               <span
@@ -24,7 +24,7 @@
                 :class="`grade-${movie.audience}`"
               />
             </span>
-          </a>
+          </router-link>
           <span
             v-if="movie.special_hall.length > 0"
             class="screentype"
@@ -51,12 +51,12 @@
             </div>
             <span class="txt-info">
               <strong>
-                {{ moment(movie.release_date) }}
+                {{ $moment(movie.release_date) }}
                 <span v-show="movie.re_opening === true">재개봉</span><span v-show="movie.re_opening === false">개봉</span>
                 <em
-                  v-if="d_Days(movie.release_date)"
+                  v-if="$d_Days(movie.release_date)"
                   class="dday"
-                >D-{{ d_Days(movie.release_date) }}</em>
+                >D-{{ $d_Days(movie.release_date) }}</em>
               </strong>
             </span>
             <span class="like">
@@ -75,18 +75,10 @@
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/runtime-core';
 import { MovieChartBeScreen } from '@/types/MainInterface'
-import { getImageUrl, d_Days, moment } from '@/plugins/Global'
 export default defineComponent({
     props: {
         movie_list: Array as PropType<Array<MovieChartBeScreen>>,
     },
-    data() {
-        return {
-            getImageUrl: getImageUrl,
-            d_Days: d_Days,
-            moment: moment,
-        }
-    }
 });
 </script>
 

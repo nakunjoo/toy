@@ -9,6 +9,14 @@ export interface MovieChartBeScreen {
     golden_egg_value: string, // 골든에그 값
     reservation_rate: string, // 예매율
     re_opening: boolean, // 재개봉 여부
+    foreman: Array<string>, // 감독
+    produce: Array<string>, // 프로듀스
+    actor: Array<string>, // 배우
+    genre: Array<string>, // 장르
+    runing_time: number, // 상영 시간
+    country: Array<string>, // 국가
+    detail_title: string, // 상세정보 제목
+    detail_content: string, // 상세정보 내용
 }
 
 

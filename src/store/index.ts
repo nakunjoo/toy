@@ -1,7 +1,9 @@
 import { createStore } from 'vuex';
+import MovieChart from './modules/MovieChart';
 
-// export interface RootState {
-// }
-
-export default createStore({
+const store =  createStore({
+    modules: {
+        MovieChart,
+    }
 });
+export default store

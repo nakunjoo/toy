@@ -7,13 +7,13 @@ export const moment:MomentType = (date:Date)=>{
     return mm(date).format('YYYY-MM-DD')
 }
 
-type GetImageUrlnType = (name:string) => any
+export type GetImageUrlnType = (name:string) => any
 export const getImageUrl:GetImageUrlnType = (name:string) => {
     const url = new URL(name, import.meta.url).href
     return url
   }
 
-type d_DaysType = (name: Date) => any
+export type d_DaysType = (name: Date) => any
 export const d_Days:d_DaysType = (date: Date) => {
     const toDay = mm(new Date)
     const end = mm(date)
@@ -25,4 +25,20 @@ export const d_Days:d_DaysType = (date: Date) => {
         d_Days = Math.ceil(duration)
     }
     return d_Days
+}
+
+export type movieIsRatedType = (name: string) => string | undefined
+export const movieIsRated: movieIsRatedType = (rated: string) => {
+    let str
+    if (rated === 'all') {
+        str = '전체'
+    } else if (rated === '12') {
+        str = '12세 이상'
+    } else if (rated === '15') {
+        str = '15세 이상'
+    } else if (rated === '19') {
+        str = '청소년 관람불가'
+    }
+
+    return str
 }
