@@ -22,6 +22,19 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped lang="scss">
+#contaniner {
+  position: relative;
+  width: 100%;
+  z-index: 7;
+
+  > .contents {
+    clear: both;
+    padding-bottom: 50px;
+    position: relative;
+    width: 980px;
+    margin: 0 auto;
+  }
+}
 
 </style>

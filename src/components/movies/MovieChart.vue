@@ -5,7 +5,7 @@
     </h4>
     <ol>
       <li
-        v-for="(movie, index) in movie_list"
+        v-for="(movie, index) in chartList"
         :key="index"
       >
         <div class="box-image">
@@ -77,7 +77,10 @@ import { defineComponent, PropType } from '@vue/runtime-core';
 import { MovieChartBeScreen } from '@/types/MainInterface'
 export default defineComponent({
     props: {
-        movie_list: Array as PropType<Array<MovieChartBeScreen>>,
+      chartList: {
+        type: Array as PropType<Array<MovieChartBeScreen>>,
+        required: true,
+      },
     },
 });
 </script>

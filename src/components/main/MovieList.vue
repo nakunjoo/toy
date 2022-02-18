@@ -3,13 +3,29 @@
     <div class="contents">
       <div class="movieChartBeScreen_btn_wrap">
         <div class="tabBtn_wrap">
-          <h3><a href="#none">무비차트</a></h3>
-          <h3><a href="#none">상영예정작</a></h3>
+          <h3>
+            <a
+              href="#none"
+              :class="{active:list_type === 'movie'}"
+              @click="typeChange('movie')"
+            >무비차트</a>
+          </h3>
+          <h3>
+            <a
+              href="#none"
+              :class="{active:list_type === 'bescreen'}"
+              @click="typeChange('bescreen')"
+            >상영예정작</a>
+          </h3>
         </div>
-        <a
-          href="#none"
+        <router-link
+          :to="{ name: 'Movies', query: {
+            type: list_type
+          } }"
           class="btn_allView"
-        >전체보기</a>
+        >
+          전체보기
+        </router-link>
       </div>
       <swiper
         :slides-per-view="5"
@@ -19,7 +35,7 @@
         class="movieChart_list"
       >
         <swiper-slide
-          v-for="(chart, index) in movie_list"
+          v-for="(chart, index) in swiper_list"
           :key="index"
         >
           <div class="img_wrap">
@@ -52,10 +68,12 @@
               </i>
             </div>
             <div class="movieChart_btn_wrap">
-              <a
-                href="#none"
+              <router-link
+                :to="{ name: 'MoviesDetail', query:{ movie_id: index } }"
                 class="btn_movieChart_detail"
-              >상세보기</a>
+              >
+                상세보기
+              </router-link>
               <a
                 href="#none"
                 class="btn_movieChart_ticketing"
@@ -86,20 +104,46 @@ import { defineComponent } from '@vue/runtime-core';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import '../../assets/css/swiper.min.scss';
 import { mapGetters } from 'vuex'
+import { MovieChartBeScreen } from '@/types/MainInterface'
 
 import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 
 SwiperCore.use([Autoplay, Pagination, Navigation]);
+
+type listType = 'movie' | 'bescreen'
 
 export default defineComponent({
   components: {
     Swiper,
     SwiperSlide,
   },
+  data() {
+    return {
+      list_type: 'movie' as listType,
+      swiper_list: [] as Array<MovieChartBeScreen>,
+    }
+  },
   computed: {
     ...mapGetters({
-      movie_list: 'MovieChart/movie_list'
+      movie_list: 'MovieChart/movie_list',
+      bescreen_list: 'MovieChart/bescreen_list'
     })
+  },
+  mounted() {
+    this.getList()
+  },
+  methods: {
+    getList() {
+      if (this.list_type === 'movie') {
+        this.swiper_list = this.movie_list
+      } else {
+        this.swiper_list = this.bescreen_list
+      }
+    },
+    typeChange(type:listType) {
+      this.list_type = type
+      this.getList()
+    }
   }
 });
 </script>
@@ -154,6 +198,11 @@ export default defineComponent({
               font-size: 26px;
               color: #666;
               line-height: 1.423em;
+
+              &.active {
+                font-weight: 700;
+                color: #222;
+              }
             }
           }
         }
@@ -185,6 +234,70 @@ export default defineComponent({
               width: 170px;
               height: 234px;
               border-radius: 10px;
+
+              &:hover {
+                box-shadow: 6px 10px 20px 0 rgb(0 0 0 / 40%);
+
+                &::before {
+                  background-color: rgba(0, 0, 0, 0.5);
+                  background-image: none;
+                }
+
+                &::after {
+                  opacity: 0;
+                }
+
+                > .movieAgeLimit_wrap {
+                  display: none;
+                }
+
+                > .screenType_wrap {
+                  display: none;
+                }
+                
+                > .movieChart_btn_wrap {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                  height: 100%;
+                  z-index: 3;
+
+                  > a {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 120px;
+                    height: 34px;
+                    font-weight: 500;
+                    font-size: 13px;
+                    line-height: 1.462em;
+                    border-radius: 4px;
+
+                    &~a {
+                      margin-top: 6px;
+                    }
+
+                    &:hover {
+                      opacity: 0.8;
+                    }
+
+                    &.btn_movieChart_detail {
+                      color: #666;
+                      background-color: #fff;
+                    }
+
+                    &.btn_movieChart_ticketing {
+                      color: #fff;
+                      background-color: #fb4357;
+                    }
+                  }
+                }
+              }
 
               &::before {
                 content: '';

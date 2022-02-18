@@ -254,6 +254,13 @@ export default defineComponent({
                                 border-radius: 10px;
                                 position: relative;
 
+                                &:hover {
+                                    > img {
+                                        transform: scale(1.1) translate(0, -45%);
+                                        transition: all 0.5s;
+                                    }
+                                }
+
                                 > img {
                                     position: absolute;
                                     left: 0;

@@ -18,7 +18,11 @@
           :class="{'active':nav_over_menu === true}"
         >
           <h2 @mouseover="overMenuView">
-            <router-link :to="{ name: 'Movies', params:{ type: 'chart' } }">
+            <router-link
+              :to="{ name: 'Movies', query: {
+                type: 'movie'
+              } }"
+            >
               영화
             </router-link>
           </h2>
@@ -27,14 +31,22 @@
           >
             <dt>
               <h2>
-                <router-link :to="{ name: 'Movies', params:{ type: 'chart' } }">
+                <router-link
+                  :to="{ name: 'Movies', query: {
+                    type: 'movie'
+                  } }"
+                >
                   영화
                 </router-link>
               </h2>
             </dt>
             <dd>
               <h3>
-                <router-link :to="{ name: 'Movies', params:{ type: 'chart' } }">
+                <router-link
+                  :to="{ name: 'Movies', query: {
+                    type: 'movie'
+                  } }"
+                >
                   무비차트
                 </router-link>
               </h3>

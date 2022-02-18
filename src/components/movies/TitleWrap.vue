@@ -3,11 +3,23 @@
     <h3>무비차트</h3>
     <div class="submenu">
       <ul>
-        <li :class="{on:title_type === 'chart'}">
-          <a href="#none">무비차트</a>
+        <li :class="{on:listType === 'movie'}">
+          <router-link
+            :to="{ name: 'Movies', query: {
+              type: 'movie'
+            } }"
+          >
+            무비차트
+          </router-link>
         </li>
-        <li :class="{on:title_type === 'will'}">
-          <a href="#none">상영예정작</a>
+        <li :class="{on:listType === 'bescreen'}">
+          <router-link
+            :to="{ name: 'Movies', query: {
+              type: 'bescreen'
+            } }"
+          >
+            상영예정작
+          </router-link>
         </li>
       </ul>
     </div>
@@ -19,7 +31,10 @@ import { defineComponent } from '@vue/runtime-core';
 
 export default defineComponent({
   props: {
-      title_type: String,
+    listType: {
+      type: String,
+      required: true,
+    },
   }
 });
 </script>

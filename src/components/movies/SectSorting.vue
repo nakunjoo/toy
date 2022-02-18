@@ -4,8 +4,12 @@
       <input
         id="chk_nowshow"
         type="checkbox"
+        :checked="nowMovies"
+        @input="nowMovie"
       >
-      <label for="chk_nowshow">현재 상영작만 보기</label>
+      <label
+        for="chk_nowshow"
+      >현재 상영작만 보기</label>
     </div>
     <label
       for="order_type"
@@ -41,7 +45,23 @@
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core';
 export default defineComponent({
-    
+  props: {
+    nowMovies: {
+      type: Boolean,
+      required: true,
+    }
+  },
+  methods: {
+    nowMovie(e:any) {
+      const checked = e.target.checked
+      this.$router.push({
+        name: 'Movies',
+        query: {
+          now: checked,
+        }
+      })
+    }
+  }
 });
 </script>
 
