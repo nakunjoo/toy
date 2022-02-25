@@ -1,10 +1,10 @@
 import mm from 'moment'
 
 
-export type MomentType = (name:Date) => string
+export type MomentType = (name:any) => any
 
-export const moment:MomentType = (date:Date)=>{
-    return mm(date).format('YYYY-MM-DD')
+export const moment:MomentType = (date:any)=>{
+    return mm(date)
 }
 
 export type GetImageUrlnType = (name:string) => any

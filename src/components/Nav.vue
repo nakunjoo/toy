@@ -58,13 +58,29 @@
         </li>
         <li :class="{'active':nav_over_menu === true}">
           <h2 @mouseover="overMenuView">
-            <a href="">극장</a>
+            <router-link
+              :to="{ name: 'Theaters', query: {
+                area: '0',
+                theater: '0'
+              }}"
+            >
+              극장
+            </router-link>
           </h2>
           <dl
             class="nav_overMenu"
           >
             <dt>
-              <h2><a href="">극장</a></h2>
+              <h2>
+                <router-link
+                  :to="{ name: 'Theaters', query: {
+                    area: '0',
+                    theater: '0'
+                  }}"
+                >
+                  극장
+                </router-link>
+              </h2>
             </dt>
             <dd>
               <h3><a href="">CGV 극장</a></h3>

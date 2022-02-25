@@ -1,5 +1,6 @@
 // 무비차트, 상영예정작 정보
 export interface MovieChartBeScreen {
+    id: string, // 영화 고유 id
     movie_img: string, // 영화 이미지
     audience: string, // 관람가
     release_date: Date, // 개봉 D-day
