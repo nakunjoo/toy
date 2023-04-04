@@ -41,6 +41,7 @@ export default defineComponent({
     })
   },
   watch: {
+    // route값이 바뀔때 같은 페이지일 경우 페이지 초기화 및 영화 리스트 다시 호출
     $route(to, from) {
       if (to.name === from.name) {
         this.setPage()
@@ -54,6 +55,7 @@ export default defineComponent({
   },
   
   methods: {
+    // 현재 상영중인 영화만 보기 체크 여부
     setPage() {
       if (this.$route.query.now === 'true') {
         this.now_movies = true
@@ -62,6 +64,7 @@ export default defineComponent({
       }
       this.list_type = this.$route.query.type
     },
+    // 선택된 타입에 따라 영화 목록 불러오기
     getList() {
       if (this.list_type === 'movie') {
         if (this.now_movies === true) {

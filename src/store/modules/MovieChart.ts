@@ -89,7 +89,7 @@ export class Movie {
       id: '4',
       movie_img: '../assets/movie_img/movie_main_4.jpg',
       audience: '12',
-      release_date: new Date('2022-02-16'),
+      release_date: new Date('2022-03-16'),
       special_hall: ['imax'],
       title: '덩케르크',
       golden_egg: 'Preegg',

@@ -3,6 +3,7 @@ import index from '../views/index.vue';
 import Movies from '../views/movies/index.vue';
 import MoviesDetail from '../views/movies/Detail.vue';
 import Theaters from '../views/theaters/index.vue';
+import Ticket from '../views/ticket/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -24,7 +25,12 @@ const routes: Array<RouteRecordRaw> = [
 		path: '/theaters',
 		component: Theaters,
 		name: 'Theaters',
-	}
+	},
+	{
+		path: '/ticket',
+		component: Ticket,
+		name: 'Ticket',
+	},
 ];
 
 const router = createRouter({

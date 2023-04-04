@@ -16,7 +16,7 @@ export class Theater {
             show_number: 6,
             total_seats: 874,
             information: '',
-            hall_id: ['0'],
+            hall_id: ['0', '1'],
         }
     ]
     public hall_list: Array<hallInfo> = [
@@ -24,29 +24,59 @@ export class Theater {
             id: '0',
             theater_id: '0',
             name: '1관 6층',
-            reserved_seats: 158,
-            unreserved_seats: 0,
             seats: 158,
+            screen: '2D',
             screenMovie: [
                 {
                     movies_id: '0',
                     start_time: '11:15',
                     end_time: '13:30',
+                    reserved_seats: 158,
+                    unreserved_seats: 0,
                 },
                 {
                     movies_id: '1',
                     start_time: '13:50',
                     end_time: '15:30',
+                    reserved_seats: 158,
+                    unreserved_seats: 0,
                 },
                 {
                     movies_id: '2',
                     start_time: '16:00',
                     end_time: '18:30',
+                    reserved_seats: 158,
+                    unreserved_seats: 0,
                 },
                 {
                     movies_id: '3',
                     start_time: '19:15',
                     end_time: '21:30',
+                    reserved_seats: 158,
+                    unreserved_seats: 0,
+                },
+            ]
+        },
+        {
+            id: '1',
+            theater_id: '0',
+            name: '2관(LASER) 6층',
+            seats: 124,
+            screen: '2D',
+            screenMovie: [
+                {
+                    movies_id: '0',
+                    start_time: '10:15',
+                    end_time: '13:30',
+                    reserved_seats: 124,
+                    unreserved_seats: 0,
+                },
+                {
+                    movies_id: '3',
+                    start_time: '15:50',
+                    end_time: '17:30',
+                    reserved_seats: 124,
+                    unreserved_seats: 0,
                 },
             ]
         }

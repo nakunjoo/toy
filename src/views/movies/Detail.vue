@@ -16,7 +16,7 @@ export default defineComponent({
     },
     computed: {
     ...mapGetters({
-      movie_list: 'MovieChart/movie_list',
+      movie_list: 'MovieChart/movie_list', //vuex에 설정해둔 영화 목록 더미데이터
     })
   }
 })

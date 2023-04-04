@@ -24,7 +24,7 @@ export default defineComponent({
 		return {};
 	},
 	mounted() {
-		this.getMovies()
+		// this.getMovies()
 
 	},
 	methods: {

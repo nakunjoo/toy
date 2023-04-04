@@ -2,9 +2,8 @@ export interface hallInfo {
     id: string, // 상영관 고유 번호
     theater_id: string, // 소속된 영화관 고유 번호
     name: string, // 상영관 이름
-    reserved_seats: number, // 예매 가능 좌석
-    unreserved_seats: number, // 예매 된 좌석
     seats: number, // 총 좌석 수
+    screen: string, // 상영
     screenMovie: Array<any>,
 }
 
@@ -12,6 +11,8 @@ export interface screenMovie {
     movies_id: string // 현재 상영관에서 상영하는 영화 고유 id
     start_time: string, // 상영 시작 시간
     end_time: string, // 상영 종료 시간
+    reserved_seats: number, // 예매 가능 좌석
+    unreserved_seats: number, // 예매 된 좌석
 }
 
 export interface TheatersInfo {

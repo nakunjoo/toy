@@ -16,8 +16,14 @@
           v-if="get_theater === true"
           :theater-info="theaterInfo"
         />
+        <TheaterShowTime
+          v-if="get_theater === true"
+          :week-date="weekDate"
+          :theater-info="theaterInfo"
+          :theater-movies="theaterMovies"
+          @week-change="weekChange()"
+        />
       </div>
-      <div>{{ dateList }}</div>
     </div>
   </div>
 </template>
@@ -26,12 +32,16 @@
 import { defineComponent } from '@vue/runtime-core';
 import TheaterList from '@/components/theaters/TheaterList.vue'
 import TheaterInfo from '@/components/theaters/TheaterInfo.vue'
+import TheaterShowTime from '@/components/theaters/TheaterShowTime.vue'
 import { mapGetters } from 'vuex'
+
+type weekNum = 0 | 1
 
 export default defineComponent({
     components: {
         TheaterList,
         TheaterInfo,
+        TheaterShowTime,
     },
     data() {
         return {
@@ -39,6 +49,8 @@ export default defineComponent({
             select_area: '서울' as string,
             theaterInfo: {} as any,
             get_theater: false as boolean,
+            week_num: 0 as weekNum,
+            theaterMovies: {},
         }
     },
     computed: {
@@ -47,9 +59,10 @@ export default defineComponent({
       hall_list: 'Theater/hall_list',
       movie_list: 'MovieChart/movie_list',
     }),
+    // 오늘 날짜를 기준으로 2주후 까지의 날짜 값 배열로 반환
     dateList() {
       const toDay = this.$moment(new Date).format('YYYY-MM-DD')
-      const twoWeeks = this.$moment(new Date).add('14', 'd').format('YYYY-MM-DD')
+      const twoWeeks = this.$moment(new Date).add('13', 'd').format('YYYY-MM-DD')
       let dateList = []
       let curDate = new Date(toDay)
       while(curDate <= new Date(twoWeeks)) {
@@ -63,41 +76,76 @@ export default defineComponent({
         curDate.setDate(curDate.getDate() + 1);
       }
       return dateList
-    }
-  },
-    mounted() {
-        this.getArea()
-        this.getSchedule()
     },
-    methods: {
-        getArea() {
-            const areaIndex = Number(this.$route.query.area)
-            this.select_area = this.cgv_area[areaIndex]
-        },
-        async getSchedule() {
-            const index = Number(this.$route.query.theater)
-            let theater = this.theater_list[index]
-            this.hall_list.map((data:any)=>{
-                if (theater.hall_id.includes(data.id)) {
-                    theater.hall = data
+    // dateList에 있는 날짜값에서 이번주 혹은 다음주의 날짜 값 반환
+    weekDate() {
+      let weekDate:any = []
+      const start = this.week_num * 7
+      const end = start + 7
+      for(let i = start; i < end; i++) {
+        weekDate.push(this.dateList[i])
+      }
+      return weekDate
+    },
+  },
+  mounted() {
+      this.getArea()
+      this.getSchedule()
+  },
+  methods: {
+    // 페이지 로딩시 query값에서 선택된 지역값을 받아오기
+    getArea() {
+      const areaIndex = Number(this.$route.query.area)
+      this.select_area = this.cgv_area[areaIndex]
+    },
+    // 페이지 로딩시 query값에서 선택된 극장의 정보를 불러옴
+    async getSchedule() {
+        const index = Number(this.$route.query.theater)
+        let theater = this.theater_list[index]
+        let hall:any = []
+        await this.hall_list.map((data:any)=>{
+            if (theater.hall_id.includes(data.id)) {
+              hall.push(data)
+            }
+        })
+        theater.hall = hall
+        await this.getMovies(theater)
+    },
+    // 극장에서 상영중인 영화 및 상영관 값을 불러옴
+    async getMovies(theater:any) {
+      let theaterMovies:any = {}
+      await theater.hall.map(async (hall:any)=>{
+        let screenMovie = hall.screenMovie
+        await screenMovie.map(async (screen:any)=>{
+          await this.movie_list.map((movie:any)=>{
+            if (movie.id === screen.movies_id) {
+              if (theaterMovies[movie.id]) {
+                if (!theaterMovies[movie.id].hall[hall.id]) {
+                  theaterMovies[movie.id].hall[hall.id] = hall
                 }
-            })
-            await this.getMovies(theater)
-        },
-        async getMovies(theater:any) {
-          let screenMovie = theater.hall.screenMovie
-          screenMovie.map((screen:any)=>{
-            this.movie_list.map((movie:any)=>{
-              if (movie.id === screen.movies_id) {
-                return screen.movies = movie
+              } else {
+                theaterMovies[movie.id] = {}
+                theaterMovies[movie.id].info = movie
+                theaterMovies[movie.id].hall = {}
+                theaterMovies[movie.id].hall[hall.id] = hall
               }
-            })
+            }
           })
-          this.theaterInfo = theater
-          this.get_theater = true
-          console.log(this.theaterInfo)
-        }
+        })
+      })
+      this.theaterInfo = theater
+      this.theaterMovies = theaterMovies
+      this.get_theater = true
+    },
+    // 이번주 또는 다음주 날짜 보기
+    weekChange() {
+      if (this.week_num === 0) {
+        this.week_num = 1
+      } else {
+        this.week_num = 0
+      }
     }
+  }
 })
 </script>
 

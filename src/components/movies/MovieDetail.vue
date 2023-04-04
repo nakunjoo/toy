@@ -92,7 +92,7 @@
             </dd>
             <dt>개봉 :&nbsp;</dt>
             <dd class="on">
-              {{ $moment(movie.release_date) }}<span v-show="movie.re_opening === true">(재개봉)</span>
+              {{ $moment(movie.release_date).format('YYYY-MM-DD') }}<span v-show="movie.re_opening === true">(재개봉)</span>
             </dd>
           </dl>
         </div>

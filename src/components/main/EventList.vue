@@ -42,7 +42,7 @@
                 >
               </div>
               <strong>{{ event.title }}</strong>
-              <span>{{ $moment(event.start_day) }}~{{ $moment(event.end_day) }}</span>
+              <span>{{ $moment(event.start_day).format('YYYY-MM-DD') }}~{{ $moment(event.end_day).format('YYYY-MM-DD') }}</span>
             </a>
           </swiper-slide>
         </swiper>
@@ -71,7 +71,7 @@ export default defineComponent({
     data() {
         return {
             swiper: null as any,
-            event_status: 'play' as eventStatus,
+            event_status: 'play' as eventStatus, // 이벤트 탭의 swiper on/off 여부 
             event_list: [
                 {
                     event_img: '../assets/event_img/event_main_1.jpg',
@@ -122,10 +122,11 @@ export default defineComponent({
                     start_day: new Date('2022-01-25'),
                     end_day: new Date('2022-02-22'),
                 },
-            ] as Array<EventList>
+            ] as Array<EventList> // 이벤트 더미데이터
         }
     },
     methods: {
+        // swiper autoplay on/off
         eventPlayStop() {
             if (this.event_status === 'play') {
                 this.event_status = 'stop'
@@ -135,6 +136,7 @@ export default defineComponent({
                 this.swiper.autoplay.start()
             }
         },
+        // swiper 모듈 실행, this.swiper에 swiper값을 담는다.
         onSwiper(swiper:any) {
             this.swiper = swiper
         }

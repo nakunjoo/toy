@@ -133,6 +133,7 @@ export default defineComponent({
     this.getList()
   },
   methods: {
+    // list_type 값에 따라 swiper_list에 영화 목록을 담는다.
     getList() {
       if (this.list_type === 'movie') {
         this.swiper_list = this.movie_list
@@ -140,6 +141,7 @@ export default defineComponent({
         this.swiper_list = this.bescreen_list
       }
     },
+    // 선택된 무비차트 or 상영예정작 값을 list_type 값에 담는다.
     typeChange(type:listType) {
       this.list_type = type
       this.getList()

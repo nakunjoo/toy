@@ -3,7 +3,18 @@ import { Store } from 'vuex';
 import App from './App.vue';
 import router from './router/index';
 import store from './store/index'
-import { moment, MomentType, getImageUrl, GetImageUrlnType, d_Days, d_DaysType, movieIsRated, movieIsRatedType } from './plugins/Global'
+import { 
+    moment, 
+    MomentType, 
+    getImageUrl, 
+    GetImageUrlnType, 
+    d_Days, 
+    d_DaysType, 
+    movieIsRated, 
+    movieIsRatedType, 
+    weekDay, 
+    weekDayType 
+} from './plugins/Global'
 
 interface State {
     count: number
@@ -16,6 +27,7 @@ declare module '@vue/runtime-core' {
         $getImageUrl: GetImageUrlnType,
         $d_Days: d_DaysType,
         $movieIsRated: movieIsRatedType,
+        $weekDay: weekDayType,
     }
 }
 
@@ -26,4 +38,5 @@ app.config.globalProperties.$moment = moment
 app.config.globalProperties.$getImageUrl = getImageUrl
 app.config.globalProperties.$d_Days = d_Days
 app.config.globalProperties.$movieIsRated = movieIsRated
+app.config.globalProperties.$weekDay = weekDay
 app.mount('#app')

@@ -43,39 +43,42 @@ import { defineComponent } from '@vue/runtime-core';
 type videoStatus = 'play'|'pause'
 type soundStatus = 'on'|'off'
 export default defineComponent({
-    data() {
-        return {
-          video_status: 'play' as videoStatus,
-          sound_status: 'off' as soundStatus,
+  data() {
+      return {
+        video_status: 'play' as videoStatus,
+        sound_status: 'off' as soundStatus,
+      }
+  },
+  methods: {
+    // 비디오 재생, 멈춤 버튼 이벤트
+    videoPlayStop() {
+        let video:any
+        video = this.$refs.videoPlayer
+        if (this.video_status === 'play') {
+            video.pause()
+            this.video_status = 'pause'
+        } else {
+            video.play()
+            this.video_status = 'play'
         }
     },
-    methods: {
-        videoPlayStop() {
-            let video:any
-            video = this.$refs.videoPlayer
-            if (this.video_status === 'play') {
-                video.pause()
-                this.video_status = 'pause'
-            } else {
-                video.play()
-                this.video_status = 'play'
-            }
-        },
-        videoSoundOnOff() {
-          let video:any
-            video = this.$refs.videoPlayer
-            if (this.sound_status === 'on') {
-                video.muted = true
-                this.sound_status = 'off'
-            } else {
-                video.muted = false
-                this.sound_status = 'on'
-            }
-        },
-        setVideoPlay() {
-          this.video_status = 'pause'
+    // 비디오 소리 on/off 이벤트
+    videoSoundOnOff() {
+      let video:any
+        video = this.$refs.videoPlayer
+        if (this.sound_status === 'on') {
+            video.muted = true
+            this.sound_status = 'off'
+        } else {
+            video.muted = false
+            this.sound_status = 'on'
         }
+    },
+    // 비디오 재생이 끝나면 자동으로 멈춤상태로 전환
+    setVideoPlay() {
+      this.video_status = 'pause'
     }
+  }
 })
 </script>
 

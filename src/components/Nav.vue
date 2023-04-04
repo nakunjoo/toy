@@ -92,16 +92,32 @@
         </li>
         <li :class="{'active':nav_over_menu === true}">
           <h2 @mouseover="overMenuView">
-            <a href="">예매</a>
+            <router-link
+              :to="{ name: 'Ticket'}"
+            >
+              예매
+            </router-link>
           </h2>
           <dl
             class="nav_overMenu"
           >
             <dt>
-              <h2><a href="">예매</a></h2>
+              <h2>
+                <router-link
+                  :to="{ name: 'Ticket'}"
+                >
+                  예매
+                </router-link>
+              </h2>
             </dt>
             <dd>
-              <h3><a href="">빠른예매</a></h3>
+              <h3>
+                <router-link
+                  :to="{ name: 'Ticket'}"
+                >
+                  빠른예매
+                </router-link>
+              </h3>
             </dd>
             <dd>
               <h3><a href="">상영스케줄</a></h3>
@@ -214,9 +230,11 @@ export default defineComponent({
     window.removeEventListener('scroll', this.detectWindowScrollY)
   },
   methods: {
+    // nav부분에 마우스 오버시 서브메뉴 보임
     overMenuView() {
       this.nav_over_menu = true
     },
+    // nav부분에서 마우스 아웃시 서브메뉴 숨김
     overMenuHide() {
       this.nav_over_menu = false
     },

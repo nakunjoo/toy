@@ -84,10 +84,11 @@ export default defineComponent({
         }
     },
     methods: {
-        hallChange(index:number) {
-            this.hall_number = index
-            this.specialHall = this.specialHall_list[index]
-        }
+      // 마우스 오버한곳 위치에따라 특별관 정보 변경
+      hallChange(index:number) {
+        this.hall_number = index
+        this.specialHall = this.specialHall_list[index]
+      }
     }
 })
 </script>

@@ -58,6 +58,7 @@ export default defineComponent({
         name: 'Movies',
         query: {
           now: checked,
+          type:this.$route.query.type
         }
       })
     }

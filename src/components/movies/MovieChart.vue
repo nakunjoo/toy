@@ -51,7 +51,7 @@
             </div>
             <span class="txt-info">
               <strong>
-                {{ $moment(movie.release_date) }}
+                {{ $moment(movie.release_date).format('YYYY-MM-DD') }}
                 <span v-show="movie.re_opening === true">재개봉</span><span v-show="movie.re_opening === false">개봉</span>
                 <em
                   v-if="$d_Days(movie.release_date)"

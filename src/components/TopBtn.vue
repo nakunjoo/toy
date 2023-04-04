@@ -3,14 +3,17 @@
     class="fixedBtn_wrap"
     :class="{topBtn:top_btn === true}"
   >
-    <a
-      href="#none"
+    <router-link
       class="btn_fixedTicketing"
-    >예매하기</a>
+      :to="{ name: 'Ticket'}"
+    >
+      예매하기
+    </router-link>
 
     <a
       href="#none"
       class="btn_gotoTop"
+      @click="topMove"
     >
       <img
         src="../assets/icon/gotoTop.png"
@@ -36,6 +39,7 @@ export default defineComponent({
         window.removeEventListener('scroll', this.detectWindowScrollY)
     },
     methods: {
+        // 현재 스크롤 위치에따라 보이거나 숨김
         detectWindowScrollY() {
             if (window.scrollY > 100) {
                 this.top_btn = true
@@ -43,6 +47,10 @@ export default defineComponent({
                 this.top_btn = false
             }
         },
+        // 맨위로 이동 이벤트
+        topMove() {
+            window.scrollTo({top:0, left:0, behavior:'smooth'})
+        }
     }
 })
 </script>
